@@ -2,12 +2,13 @@
 
 Name:    cauth
 Version: 0.7.1
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: %{sum}
 
 License: ASL 2.0
 URL:     https://softwarefactory-project.io/r/p/%{name}
 Source0: https://github.com/redhat-cip/%{name}/archive/%{version}.tar.gz
+Source1: cauth_logrotate.conf
 
 BuildArch: noarch
 
@@ -38,7 +39,9 @@ BuildRequires: python2-pecan
 Summary: %{sum}
 
 Requires: MySQL-python
+Requires: httpd
 Requires: m2crypto
+Requires: mod_auth_pubtkt
 Requires: python-sphinx
 Requires: python-sqlalchemy
 Requires: python2-basicauth
@@ -50,6 +53,7 @@ Requires: python2-redmine
 Requires: python2-requests
 Requires: python2-stevedore
 Requires: python2-wsgiref
+Requires: policycoreutils
 
 %description -n python2-%{name}
 %{sum}
@@ -64,13 +68,42 @@ export PBR_VERSION=%{version}
 %install
 export PBR_VERSION=%{version}
 %{__python2} setup.py install --skip-build --root %{buildroot}
+install -d %{buildroot}/%{_var}/www/%{name}
+install -d %{buildroot}/%{_var}/log/%{name}
+install -d %{buildroot}/%{_var}/lib/%{name}/{templates,keys}
+install -d %{buildroot}/%{_sysconfdir}/logrotate.d
+install -p -m 644 %{SOURCE1} %{buildroot}/%{_sysconfdir}/logrotate.d/cauth.conf
+install -p -D -m 640 etc/config.py %{buildroot}%{_sysconfdir}/cauth/config.py
 
 %check
 PYTHONPATH=%{buildroot}/%{python2_sitelib} PBR_VERSION=%{version} nosetests -v
 
+%pre
+getent group cauth >/dev/null || groupadd -r cauth
+if ! getent passwd cauth >/dev/null; then
+    useradd -r -g cauth -G cauth -d %{_sharedstatedir}/cauth -s /sbin/nologin -c "Cauth Daemon" cauth
+fi
+exit 0
+
+%post
+semanage fcontext -a -t httpd_sys_content_t %{buildroot}/%{_sysconfdir}/%{name}
+semanage fcontext -a -t httpd_sys_content_t %{buildroot}/%{_var}/www/%{name}
+restorecon -rv  %{buildroot}/%{_sysconfdir}/%{name}
+restorecon -rv  %{buildroot}/%{_var}/www/%{name}
+
 %files -n python2-%{name}
+%doc LICENSE
 %{python2_sitelib}/*
+%attr(0750, apache, apache) %{_var}/lib/%{name}
+%attr(0750, apache, apache) %{_var}/log/%{name}
+%attr(0750, apache, apache) %{_var}/www/%{name}
+%attr(0644, root, root) %config(noreplace) %{_sysconfdir}/logrotate.d/cauth.conf
+%config(noreplace) %attr(0640, root, cauth) %{_sysconfdir}/cauth/config.py
 
 %changelog
-* Mon Mar 6 2017 Nicolas Hicher <nhicher@redhat.com> 1.0.0-1
+* Mon Mar 6 2017 Nicolas Hicher <nhicher@redhat.com> 0.7.1-2
+- Create directories in packages
+- Add logrotate config file
+
+* Mon Mar 6 2017 Nicolas Hicher <nhicher@redhat.com> 0.7.1-1
 - Initial packaging
