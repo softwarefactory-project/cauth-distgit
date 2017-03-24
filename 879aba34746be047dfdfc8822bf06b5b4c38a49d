@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5a72e520_d639c4d9",
+        "filename": "cauth.spec",
+        "patchSetId": 3
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 7
+      },
+      "writtenOn": "2017-03-24T16:45:17Z",
+      "side": 1,
+      "message": "You can also add the config:\ninstall -p -D -m 640 etc/config.py %{buildroot}%{_sysconfdir}/cauth/config.py",
+      "revId": "879aba34746be047dfdfc8822bf06b5b4c38a49d",
+      "serverId": "6c1dc8ef-8b94-40e4-bd83-c2359d45ecc0",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a72e520_b62528ad",
+        "filename": "cauth.spec",
+        "patchSetId": 3
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 7
+      },
+      "writtenOn": "2017-03-24T16:45:17Z",
+      "side": 1,
+      "message": "Hum, well we could use logrotate, but perhaps that should be groomed first... It can conflict with python logging TimedRotatingFileHandler.",
+      "revId": "879aba34746be047dfdfc8822bf06b5b4c38a49d",
+      "serverId": "6c1dc8ef-8b94-40e4-bd83-c2359d45ecc0",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a72e520_16343cdd",
+        "filename": "cauth.spec",
+        "patchSetId": 3
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 7
+      },
+      "writtenOn": "2017-03-24T16:45:17Z",
+      "side": 1,
+      "message": "And add the conf:\n\n%config(noreplace) %attr(0640, root, cauth) %{_sysconfdir}/cauth/config.py",
+      "revId": "879aba34746be047dfdfc8822bf06b5b4c38a49d",
+      "serverId": "6c1dc8ef-8b94-40e4-bd83-c2359d45ecc0",
+      "unresolved": false
+    }
+  ]
+}

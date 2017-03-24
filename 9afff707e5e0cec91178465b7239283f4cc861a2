@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5a72e520_f636c0e6",
+        "filename": "cauth.spec",
+        "patchSetId": 3
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 7
+      },
+      "writtenOn": "2017-03-24T16:45:17Z",
+      "side": 0,
+      "message": "Here create the user:\n\n%pre\ngetent group cauth \u003e/dev/null || groupadd -r cauth\nif ! getent passwd cauth \u003e/dev/null; then\n  useradd -r -g cauth -G cauth -d %{_sharedstatedir}/cauth -s /sbin/nologin -c \"Cauth Daemon\" cauth\nfi\nexit 0",
+      "revId": "9afff707e5e0cec91178465b7239283f4cc861a2",
+      "serverId": "6c1dc8ef-8b94-40e4-bd83-c2359d45ecc0",
+      "unresolved": false
+    }
+  ]
+}
