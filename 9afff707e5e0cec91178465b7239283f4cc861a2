@@ -16,6 +16,24 @@
       "revId": "9afff707e5e0cec91178465b7239283f4cc861a2",
       "serverId": "6c1dc8ef-8b94-40e4-bd83-c2359d45ecc0",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a72e520_b6b528cf",
+        "filename": "cauth.spec",
+        "patchSetId": 3
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 22
+      },
+      "writtenOn": "2017-03-27T13:21:57Z",
+      "side": 0,
+      "message": "Currently we don\u0027t have cauth user, apache user is used. Do you want to add a specific user for cauth ?",
+      "parentUuid": "5a72e520_f636c0e6",
+      "revId": "9afff707e5e0cec91178465b7239283f4cc861a2",
+      "serverId": "6c1dc8ef-8b94-40e4-bd83-c2359d45ecc0",
+      "unresolved": false
     }
   ]
 }
