@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5a72e520_990f7de1",
+        "filename": "cauth.spec",
+        "patchSetId": 8
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 7
+      },
+      "writtenOn": "2017-03-28T01:58:40Z",
+      "side": 1,
+      "message": "%{buildroot} can be dropped in %post section iiuc.",
+      "revId": "64ca6ba5a38617eb7cde761685eaf98305480aef",
+      "serverId": "6c1dc8ef-8b94-40e4-bd83-c2359d45ecc0",
+      "unresolved": false
+    }
+  ]
+}
