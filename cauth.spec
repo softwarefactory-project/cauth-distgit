@@ -3,7 +3,7 @@
 
 Name:    cauth
 Version: 0.7.1
-Release: 2%{?dist}
+Release: 3%{?dist}
 Summary: %{sum}
 
 License: ASL 2.0
@@ -26,7 +26,7 @@ BuildRequires: python2-mockldap
 BuildRequires: python2-oic
 BuildRequires: python2-pygerrit
 BuildRequires: python2-devel
-BuildRequires: python2-future
+BuildRequires: python-future
 BuildRequires: python2-httmock
 BuildRequires: python2-keystoneclient
 BuildRequires: python2-mock
@@ -108,6 +108,9 @@ restorecon -rv  %{buildroot}/%{_var}/www/%{name}
 %attr(0444, apache, apache) %config(noreplace) %{_var}/www/%{name}/app.wsgi
 
 %changelog
+* Tue Apr 18 2017 Tristan Cacqueray <tdecacqu@redhat.com> - 0.7.1-3
+- Use python-future instead of python2-future
+
 * Mon Mar 6 2017 Nicolas Hicher <nhicher@redhat.com> 0.7.1-2
 - Create directories in packages
 - Add logrotate config file
