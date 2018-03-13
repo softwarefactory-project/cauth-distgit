@@ -3,7 +3,7 @@
 
 Name:    cauth
 Version: 0.7.1
-Release: 3%{?dist}
+Release: 4%{?dist}
 Summary: %{sum}
 
 License: ASL 2.0
@@ -99,7 +99,7 @@ restorecon -rv  %{buildroot}/%{_var}/www/%{name}
 %doc LICENSE
 %{python2_sitelib}/*
 %attr(0770, apache, apache) %{_var}/lib/%{name}
-%attr(0770, apache, apache) %{_var}/log/%{name}
+%attr(0750, apache, apache) %{_var}/log/%{name}
 %attr(0770, apache, apache) %{_var}/www/%{name}
 %attr(0550, apache, apache) %{_sysconfdir}/%{name}
 %attr(0644, root, root) %config(noreplace) %{_sysconfdir}/logrotate.d/cauth.conf
@@ -108,6 +108,9 @@ restorecon -rv  %{buildroot}/%{_var}/www/%{name}
 %attr(0444, apache, apache) %config(noreplace) %{_var}/www/%{name}/app.wsgi
 
 %changelog
+* Tue Mar 13 2018 Tristan Cacqueray <tdecacqu@redhat.com> - 0.7.1-4
+- Fix /var/log permission
+
 * Tue Apr 18 2017 Tristan Cacqueray <tdecacqu@redhat.com> - 0.7.1-3
 - Use python-future instead of python2-future
 
