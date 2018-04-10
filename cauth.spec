@@ -3,7 +3,7 @@
 
 Name:    cauth
 Version: 0.7.1
-Release: 3%{?dist}
+Release: 4%{?dist}
 Summary: %{sum}
 
 License: ASL 2.0
@@ -55,6 +55,7 @@ Requires: python2-requests
 Requires: python2-stevedore
 Requires: python2-wsgiref
 Requires: policycoreutils
+Requires: mod_auth_mellon
 Requires(pre): shadow-utils
 
 %description -n python2-%{name}
@@ -108,6 +109,9 @@ restorecon -rv  %{buildroot}/%{_var}/www/%{name}
 %attr(0444, apache, apache) %config(noreplace) %{_var}/www/%{name}/app.wsgi
 
 %changelog
+* Tue Apr 10 2018 Matthieu Huin <mhuin@redhat.com> - 0.7.1-4
+- Add mod_auth_mellon dependency
+
 * Tue Apr 18 2017 Tristan Cacqueray <tdecacqu@redhat.com> - 0.7.1-3
 - Use python-future instead of python2-future
 
