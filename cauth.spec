@@ -3,7 +3,7 @@
 
 Name:    cauth
 Version: 0.7.1
-Release: 5%{?dist}
+Release: 6%{?dist}
 Summary: %{sum}
 
 License: ASL 2.0
@@ -14,6 +14,7 @@ Source1: cauth_logrotate.conf
 BuildArch: noarch
 
 BuildRequires: MySQL-python
+BuildRequires: python2-PyMySQL
 BuildRequires: m2crypto
 BuildRequires: python-sqlalchemy
 BuildRequires: python-flake8
@@ -40,6 +41,7 @@ BuildRequires: python2-pecan
 Summary: %{sum}
 
 Requires: MySQL-python
+Requires: python2-PyMySQL
 Requires: httpd
 Requires: m2crypto
 Requires: mod_auth_pubtkt
@@ -109,6 +111,10 @@ restorecon -rv  %{buildroot}/%{_var}/www/%{name}
 %attr(0444, apache, apache) %config(noreplace) %{_var}/www/%{name}/app.wsgi
 
 %changelog
+* Mon May 14 2018 Fabien Boucher <fboucher@redhat.com> - 0.7.1-6
+- Add dependency for PyMySQL, still temporary keep MySQL-python
+  for CI purpose.
+
 * Mon Apr 16 2018 Matthieu Huin <mhuin@redhat.com> - 0.7.1-5
 - Add mod_auth_mellon dependency
 
