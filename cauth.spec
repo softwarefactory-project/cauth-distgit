@@ -3,7 +3,7 @@
 
 Name:    cauth
 Version: 0.7.1
-Release: 7%{?dist}
+Release: 8%{?dist}
 Summary: %{sum}
 
 License: ASL 2.0
@@ -13,7 +13,6 @@ Source1: cauth_logrotate.conf
 
 BuildArch: noarch
 
-BuildRequires: MySQL-python
 BuildRequires: python2-PyMySQL
 BuildRequires: m2crypto
 BuildRequires: python-sqlalchemy
@@ -33,6 +32,7 @@ BuildRequires: python2-keystoneclient
 BuildRequires: python2-mock
 BuildRequires: python2-pbr
 BuildRequires: python2-pecan
+BuildRequires: python2-PyMySQL
 
 %description
 %{sum}
@@ -40,8 +40,6 @@ BuildRequires: python2-pecan
 %package -n python2-%{name}
 Summary: %{sum}
 
-Requires: MySQL-python
-Requires: python2-PyMySQL
 Requires: httpd
 Requires: m2crypto
 Requires: mod_auth_pubtkt
@@ -57,6 +55,7 @@ Requires: python2-pygerrit
 Requires: python2-requests
 Requires: python2-stevedore
 Requires: python2-wsgiref
+Requires: python2-PyMySQL
 Requires: policycoreutils
 Requires(pre): shadow-utils
 
@@ -112,8 +111,11 @@ restorecon -rv  %{buildroot}/%{_var}/www/%{name}
 %attr(0444, apache, apache) %config(noreplace) %{_var}/www/%{name}/app.wsgi
 
 %changelog
-* Sat May 19 2018 Fabien Boucher <fboucher@redhat.com> - 0.7.1-7
+* Sat May 19 2018 Fabien Boucher <fboucher@redhat.com> - 0.7.1-8
 - Add missing dependency for python-future.
+
+* Mon May 14 2018 Fabien Boucher <fboucher@redhat.com> - 0.7.1-7
+- Remove obsolete MySQL-python dependency.
 
 * Mon May 14 2018 Fabien Boucher <fboucher@redhat.com> - 0.7.1-6
 - Add dependency for PyMySQL, still temporary keep MySQL-python
