@@ -3,7 +3,7 @@
 
 Name:    cauth
 Version: 0.7.1
-Release: 6%{?dist}
+Release: 7%{?dist}
 Summary: %{sum}
 
 License: ASL 2.0
@@ -21,13 +21,13 @@ BuildRequires: python-flake8
 BuildRequires: python-nose
 BuildRequires: python-setuptools
 BuildRequires: python-webtest
+BuildRequires: python-future
 BuildRequires: python2-basicauth
 BuildRequires: python2-cryptodomex
 BuildRequires: python2-mockldap
 BuildRequires: python2-oic
 BuildRequires: python2-pygerrit
 BuildRequires: python2-devel
-BuildRequires: python-future
 BuildRequires: python2-httmock
 BuildRequires: python2-keystoneclient
 BuildRequires: python2-mock
@@ -48,6 +48,7 @@ Requires: mod_auth_pubtkt
 Requires: mod_auth_mellon
 Requires: python-sphinx
 Requires: python-sqlalchemy
+Requires: python-future
 Requires: python2-basicauth
 Requires: python2-oic
 Requires: python2-pbr
@@ -111,6 +112,9 @@ restorecon -rv  %{buildroot}/%{_var}/www/%{name}
 %attr(0444, apache, apache) %config(noreplace) %{_var}/www/%{name}/app.wsgi
 
 %changelog
+* Sat May 19 2018 Fabien Boucher <fboucher@redhat.com> - 0.7.1-7
+- Add missing dependency for python-future.
+
 * Mon May 14 2018 Fabien Boucher <fboucher@redhat.com> - 0.7.1-6
 - Add dependency for PyMySQL, still temporary keep MySQL-python
   for CI purpose.
