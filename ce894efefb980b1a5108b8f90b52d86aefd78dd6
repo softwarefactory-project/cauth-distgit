@@ -1,0 +1,8 @@
+Code-Review+2: Fabien Boucher <fboucher@redhat.com>
+Workflow+1: Fabien Boucher <fboucher@redhat.com>
+Verified+2: Zuul CI <zuul@softwarefactory-project.io>
+Submitted-by: Zuul CI <zuul@softwarefactory-project.io>
+Submitted-at: Sat, 26 May 2018 12:01:47 +0000
+Reviewed-on: https://softwarefactory-project.io/r/12191
+Project: software-factory/cauth-distgit
+Branch: refs/heads/master
