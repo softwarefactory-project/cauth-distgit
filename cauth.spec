@@ -3,7 +3,7 @@
 
 Name:    cauth
 Version: 0.7.1
-Release: 8%{?dist}
+Release: 9%{?dist}
 Summary: %{sum}
 
 License: ASL 2.0
@@ -33,6 +33,7 @@ BuildRequires: python2-mock
 BuildRequires: python2-pbr
 BuildRequires: python2-pecan
 BuildRequires: python2-PyMySQL
+BuildRequires: python-jwt
 
 %description
 %{sum}
@@ -57,6 +58,7 @@ Requires: python2-stevedore
 Requires: python2-wsgiref
 Requires: python2-PyMySQL
 Requires: policycoreutils
+Requires: python-jwt
 Requires(pre): shadow-utils
 
 %description -n python2-%{name}
@@ -111,6 +113,9 @@ restorecon -rv  %{buildroot}/%{_var}/www/%{name}
 %attr(0444, apache, apache) %config(noreplace) %{_var}/www/%{name}/app.wsgi
 
 %changelog
+*Thu Sep 13 2018 Matthieu Huin <mhuin@redhat.com> - 0.7.1-9
+- Add python-jwt dependency.
+
 * Sat May 19 2018 Fabien Boucher <fboucher@redhat.com> - 0.7.1-8
 - Add missing dependency for python-future.
 
