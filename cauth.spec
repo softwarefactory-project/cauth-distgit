@@ -2,8 +2,8 @@
 %global  sum Python-based SSO server used by the Software Factory project
 
 Name:    cauth
-Version: 0.7.1
-Release: 9%{?dist}
+Version: 0.14.0
+Release: 1%{?dist}
 Summary: %{sum}
 
 License: ASL 2.0
@@ -25,7 +25,6 @@ BuildRequires: python2-basicauth
 BuildRequires: python2-cryptodomex
 BuildRequires: python2-mockldap
 BuildRequires: python2-oic
-BuildRequires: python2-pygerrit
 BuildRequires: python2-devel
 BuildRequires: python2-httmock
 BuildRequires: python2-keystoneclient
@@ -52,7 +51,6 @@ Requires: python2-basicauth
 Requires: python2-oic
 Requires: python2-pbr
 Requires: python2-pecan
-Requires: python2-pygerrit
 Requires: python2-requests
 Requires: python2-stevedore
 Requires: python2-wsgiref
@@ -113,7 +111,10 @@ restorecon -rv  %{buildroot}/%{_var}/www/%{name}
 %attr(0444, apache, apache) %config(noreplace) %{_var}/www/%{name}/app.wsgi
 
 %changelog
-*Thu Sep 13 2018 Matthieu Huin <mhuin@redhat.com> - 0.7.1-9
+* Tue Nov 27 2018 Tristan Cacqueray <tdecacqu@redhat.com> - 0.14.0-1
+- Remove pygerrit requirements
+
+* Thu Sep 13 2018 Matthieu Huin <mhuin@redhat.com> - 0.7.1-9
 - Add python-jwt dependency.
 
 * Sat May 19 2018 Fabien Boucher <fboucher@redhat.com> - 0.7.1-8
