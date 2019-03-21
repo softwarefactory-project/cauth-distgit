@@ -3,7 +3,7 @@
 
 Name:    cauth
 Version: 0.14.0
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: %{sum}
 
 License: ASL 2.0
@@ -33,6 +33,8 @@ BuildRequires: python2-pbr
 BuildRequires: python2-pecan
 BuildRequires: python2-PyMySQL
 BuildRequires: python-jwt
+BuildRequires:  yaml-cpp
+BuildRequires:  PyYAML
 
 %description
 %{sum}
@@ -58,6 +60,8 @@ Requires: python2-PyMySQL
 Requires: policycoreutils
 Requires: python-jwt
 Requires(pre): shadow-utils
+Requires:  yaml-cpp
+Requires:  PyYAML
 
 %description -n python2-%{name}
 %{sum}
@@ -111,6 +115,9 @@ restorecon -rv  %{buildroot}/%{_var}/www/%{name}
 %attr(0444, apache, apache) %config(noreplace) %{_var}/www/%{name}/app.wsgi
 
 %changelog
+* Thu Mar 21 2019 Matthieu Huin <mhuin@redhat.com> - 0.14.0-2
+- Add pyYAML dependency
+
 * Tue Nov 27 2018 Tristan Cacqueray <tdecacqu@redhat.com> - 0.14.0-1
 - Remove pygerrit requirements
 
