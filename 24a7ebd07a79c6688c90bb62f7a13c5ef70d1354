@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ba2ccca6_e5c37ec6",
+        "filename": "cauth.spec",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 68
+      },
+      "writtenOn": "2019-05-16T07:58:50Z",
+      "side": 1,
+      "message": "Let\u0027s do a followup to remove m2crypto",
+      "revId": "24a7ebd07a79c6688c90bb62f7a13c5ef70d1354",
+      "serverId": "6c1dc8ef-8b94-40e4-bd83-c2359d45ecc0",
+      "unresolved": false
+    }
+  ]
+}
