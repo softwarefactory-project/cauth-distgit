@@ -3,7 +3,7 @@
 
 Name:    cauth
 Version: 0.14.0
-Release: 3%{?dist}
+Release: 4%{?dist}
 Summary: %{sum}
 
 License: ASL 2.0
@@ -13,7 +13,6 @@ Source1: cauth_logrotate.conf
 
 BuildArch: noarch
 
-BuildRequires: m2crypto
 BuildRequires: python2-PyMySQL
 BuildRequires: python2-crypto
 BuildRequires: python-sqlalchemy
@@ -44,7 +43,6 @@ BuildRequires:  PyYAML
 Summary: %{sum}
 
 Requires: httpd
-Requires: m2crypto
 Requires: mod_auth_pubtkt
 Requires: mod_auth_mellon
 Requires: python2-crypto
@@ -117,6 +115,9 @@ restorecon -rv  %{buildroot}/%{_var}/www/%{name}
 %attr(0444, apache, apache) %config(noreplace) %{_var}/www/%{name}/app.wsgi
 
 %changelog
+* Thu May 16 2019 Matthieu Huin <mhuin@redhat.com> - 0.14.0-4
+- Add python-crypto
+
 * Wed May 15 2019 Tristan Cacqueray <tdecacqu@redhat.com> - 0.14.0-3
 - Add python-crypto
 
