@@ -3,7 +3,7 @@
 
 Name:    cauth
 Version: 0.14.0
-Release: 4%{?dist}
+Release: 5%{?dist}
 Summary: %{sum}
 
 License: ASL 2.0
@@ -49,6 +49,7 @@ Requires: python2-crypto
 Requires: python-sphinx
 Requires: python-sqlalchemy
 Requires: python-future
+Requires: python-ldap
 Requires: python2-basicauth
 Requires: python2-oic
 Requires: python2-pbr
@@ -115,6 +116,9 @@ restorecon -rv  %{buildroot}/%{_var}/www/%{name}
 %attr(0444, apache, apache) %config(noreplace) %{_var}/www/%{name}/app.wsgi
 
 %changelog
+* Tue Jun 27 2019 Fabien Boucher <fboucher@redhat.com> - 0.14.0-5
+- Add missing python-ldap requirements
+
 * Thu May 16 2019 Matthieu Huin <mhuin@redhat.com> - 0.14.0-4
 - Add python-crypto
 
