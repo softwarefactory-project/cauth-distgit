@@ -2,69 +2,71 @@
 %global  sum Python-based SSO server used by the Software Factory project
 
 Name:    cauth
-Version: 0.14.0
-Release: 5%{?dist}
+Version: 0.15.0.1.g2d91266
+Release: 6%{?dist}
 Summary: %{sum}
 
 License: ASL 2.0
 URL:     https://softwarefactory-project.io/r/p/%{name}
-Source0: https://github.com/redhat-cip/%{name}/archive/%{version}.tar.gz
+Source0: HEAD.tgz
 Source1: cauth_logrotate.conf
 
 BuildArch: noarch
 
-BuildRequires: python2-PyMySQL
-BuildRequires: python2-crypto
-BuildRequires: python-sqlalchemy
-BuildRequires: python-flake8
-BuildRequires: python-nose
-BuildRequires: python-setuptools
-BuildRequires: python-webtest
-BuildRequires: python-future
-BuildRequires: python2-basicauth
-BuildRequires: python2-cryptodomex
-BuildRequires: python2-mockldap
-BuildRequires: python2-oic
-BuildRequires: python2-devel
-BuildRequires: python2-httmock
-BuildRequires: python2-keystoneclient
-BuildRequires: python2-mock
-BuildRequires: python2-pbr
-BuildRequires: python2-pecan
-BuildRequires: python2-PyMySQL
-BuildRequires: python-jwt
-BuildRequires:  yaml-cpp
-BuildRequires:  PyYAML
+BuildRequires: python3-pbr
+BuildRequires: python3-setuptools
+
+#BuildRequires: python3-nose
+#BuildRequires: python3-mockldap
+#BuildRequires: python3-mock
+#BuildRequires: httpd
+#BuildRequires: mod_auth_pubtkt
+#BuildRequires: mod_auth_mellon
+#BuildRequires: yaml-cpp
+#BuildRequires: python3-crypto
+#BuildRequires: python3-sphinx
+#BuildRequires: python3-sqlalchemy
+#BuildRequires: python3-ldap
+#BuildRequires: python3-basicauth
+#BuildRequires: python3-oic
+#BuildRequires: python3-pbr
+#BuildRequires: python3-pecan
+#BuildRequires: python3-requests
+#BuildRequires: python3-stevedore
+#BuildRequires: python3-PyMySQL
+#BuildRequires: python3-jwt
+#BuildRequires: python3-pyyaml
+#BuildRequires: python3-keystoneclient
+# Missing deps to run unittests
+#BuildRequires: python3-httmock
 
 %description
 %{sum}
 
-%package -n python2-%{name}
+%package -n python3-%{name}
 Summary: %{sum}
 
+Requires: policycoreutils
+Requires(pre): shadow-utils
 Requires: httpd
 Requires: mod_auth_pubtkt
 Requires: mod_auth_mellon
-Requires: python2-crypto
-Requires: python-sphinx
-Requires: python-sqlalchemy
-Requires: python-future
-Requires: python-ldap
-Requires: python2-basicauth
-Requires: python2-oic
-Requires: python2-pbr
-Requires: python2-pecan
-Requires: python2-requests
-Requires: python2-stevedore
-Requires: python2-wsgiref
-Requires: python2-PyMySQL
-Requires: policycoreutils
-Requires: python-jwt
-Requires(pre): shadow-utils
-Requires:  yaml-cpp
-Requires:  PyYAML
+Requires: yaml-cpp
+Requires: python3-crypto
+Requires: python3-sphinx
+Requires: python3-sqlalchemy
+Requires: python3-ldap
+Requires: python3-basicauth
+Requires: python3-oic
+Requires: python3-pbr
+Requires: python3-pecan
+Requires: python3-requests
+Requires: python3-stevedore
+Requires: python3-PyMySQL
+Requires: python3-jwt
+Requires: python3-pyyaml
 
-%description -n python2-%{name}
+%description -n python3-%{name}
 %{sum}
 
 %prep
@@ -72,11 +74,11 @@ Requires:  PyYAML
 
 %build
 export PBR_VERSION=%{version}
-%{__python2} setup.py build
+%{__python3} setup.py build
 
 %install
 export PBR_VERSION=%{version}
-%{__python2} setup.py install --skip-build --root %{buildroot}
+%{__python3} setup.py install --skip-build --root %{buildroot}
 install -d %{buildroot}/%{_var}/www/%{name}
 install -d %{buildroot}/%{_var}/log/%{name}
 install -d %{buildroot}/%{_var}/lib/%{name}/keys
@@ -87,7 +89,8 @@ install -p -D -m 444 cauth/templates/login.html %{buildroot}/%{_sysconfdir}/%{na
 install -p -D -m 444 app.wsgi %{buildroot}/%{_var}/www/%{name}/app.wsgi
 
 %check
-PYTHONPATH=%{buildroot}/%{python2_sitelib} PBR_VERSION=%{version} nosetests -v
+# PYTHONPATH=%{buildroot}/%{python3_sitelib} PBR_VERSION=%{version} nosetests -v
+%{__python3} -c "import cauth"
 
 %pre
 getent group cauth >/dev/null || groupadd -r cauth
@@ -102,10 +105,10 @@ semanage fcontext -a -t httpd_sys_content_t %{buildroot}/%{_var}/www/%{name}
 restorecon -rv  %{buildroot}/%{_sysconfdir}/%{name}
 restorecon -rv  %{buildroot}/%{_var}/www/%{name}
 
-%files -n python2-%{name}
+%files -n python3-%{name}
 %doc LICENSE
-%{python2_sitelib}/*
-%exclude %{python2_sitelib}/*/tests
+%{python3_sitelib}/*
+%exclude %{python3_sitelib}/*/tests
 %attr(0770, apache, apache) %{_var}/lib/%{name}
 %attr(0750, apache, apache) %{_var}/log/%{name}
 %attr(0770, apache, apache) %{_var}/www/%{name}
@@ -116,6 +119,9 @@ restorecon -rv  %{buildroot}/%{_var}/www/%{name}
 %attr(0444, apache, apache) %config(noreplace) %{_var}/www/%{name}/app.wsgi
 
 %changelog
+* Wed Nov 06 2019 Fabien Boucher <fboucher@redhat.com> - 0.14.0-6
+- Python packaging
+
 * Tue Jun 27 2019 Fabien Boucher <fboucher@redhat.com> - 0.14.0-5
 - Add missing python-ldap requirements
 
